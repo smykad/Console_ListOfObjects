@@ -21,10 +21,24 @@ namespace Console_ListOfObjects
     {
         static void Main(string[] args)
         {
+            // set cursor invisible
+            Console.CursorVisible = false;
 
+            // Greet the user
+            Console.WriteLine("\tWelcome to the Quick Code: List of Objects assignment for CIT 195");
+            Console.WriteLine();
+            Console.WriteLine();
+
+            // Prompt user to continue
+            DisplayContinuePrompt();
             var vehicles = addVehicle();
             displayVehicle(vehicles);
-            Console.ReadKey();
+            
+            // Clear Console
+            Console.Clear();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine($"Thank you for checking out this application, have a nice day!");
         }
 
         /// <summary>
@@ -44,6 +58,15 @@ namespace Console_ListOfObjects
             bool fwd;
             bool addVehicle;
 
+            //
+            // Clear Console
+            Console.Clear();
+
+            // set curosr invisible
+            Console.CursorVisible = false;
+            Console.WriteLine($"\t\tAdd Vehicle");
+            Console.WriteLine();
+
             do
             {
                 // get name of vehicle
@@ -61,8 +84,12 @@ namespace Console_ListOfObjects
                 // add vehicle to list
                 vehicles.Add(myVehicle);
 
+                Console.WriteLine();
+
                 // ask user if they want to add another vehicle
                 addVehicle = yesNo("Would you like to add another vehicle");
+                
+                Console.WriteLine();
 
             } while (!addVehicle);
 
@@ -99,6 +126,7 @@ namespace Console_ListOfObjects
             {
                 Console.WriteLine(string.Format($"\t{vehicle.Name,12}{$" {vehicle.Year}",12}{vehicle.Fwd,17}"));
             }
+            DisplayContinuePrompt();
         }
         /// <summary>
         /// ******************************************************
