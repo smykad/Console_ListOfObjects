@@ -6,8 +6,16 @@ using System.Threading.Tasks;
 
 namespace Console_ListOfObjects
 {
+    /// <summary>
+    /// ******************************************************
+    ///             VEHICLE CLASS
+    /// ******************************************************
+    /// </summary>
     public class Vehicle
     {
+        //
+        // variables for class to get/set
+        //
         private string _name;
         private int _year;
         private bool _fwd;
@@ -17,7 +25,6 @@ namespace Console_ListOfObjects
             get { return _fwd; }
             set { _fwd = value; }
         }
-
 
         public int Year
         {
@@ -35,6 +42,10 @@ namespace Console_ListOfObjects
         {
 
         }
+
+        //
+        // for creating a new vehicle
+        //
 
         public Vehicle(string name,int year, bool fwd)
         {
