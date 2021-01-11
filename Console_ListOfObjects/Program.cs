@@ -128,6 +128,9 @@ namespace Console_ListOfObjects
         /// <param name="vehicles"></param>
         static void displayVehicle(List<Vehicle> vehicles)
         {
+            // initialize variables
+            int numberOfVehicles = 0;
+
             // Clear Console
             Console.Clear();
 
@@ -146,7 +149,23 @@ namespace Console_ListOfObjects
             foreach (var vehicle in vehicles)
             {
                 Console.WriteLine(string.Format($"\t{vehicle.Name,12}{$" {vehicle.Year}",12}{vehicle.Fwd,17}"));
+                
+                // increment number of vehicles listed
+                numberOfVehicles += 1;
             }
+
+            Console.WriteLine();
+            Console.WriteLine();
+
+            // Set Console Color to Green
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write($"\tNumber of Vehicles: ");
+            
+            // set Console Color to White
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write($"{numberOfVehicles}");
+
+            // Set Console Color to Green
             Console.ForegroundColor = ConsoleColor.Green;
             DisplayContinuePrompt();
         }
