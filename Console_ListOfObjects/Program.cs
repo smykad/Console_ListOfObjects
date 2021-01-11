@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace Console_ListOfObjects
 {
@@ -19,6 +20,7 @@ namespace Console_ListOfObjects
     // **************************************************
     class Program
     {
+        #region Main
         static void Main(string[] args)
         {
             // set cursor invisible
@@ -39,6 +41,7 @@ namespace Console_ListOfObjects
             
             // Clear Console
             Console.Clear();
+            SaveVehicles(vehicles);
             Console.WriteLine();
             Console.WriteLine();
 
@@ -54,7 +57,9 @@ namespace Console_ListOfObjects
             Console.ReadKey();
 
         }
+        #endregion
 
+        #region Vehicle
         /// <summary>
         /// ******************************************************
         ///             ADD VEHICLE METHOD
@@ -93,7 +98,7 @@ namespace Console_ListOfObjects
                 name = getString("Enter the name of your vehicle");
                 
                 // get year of vehicle
-                year = Validate.ReadInteger("Enter the year your vehicle was made: ");
+                year = ReadInteger("Enter the year your vehicle was made: ");
 
                 // get bool if vehicle has four wheel drive or not
                 fwd = yesNo("Does your vehicle have four wheel drive");
@@ -171,6 +176,31 @@ namespace Console_ListOfObjects
         }
         /// <summary>
         /// ******************************************************
+        ///             SAVE VEHICLE TO FILE METHOD
+        /// ******************************************************
+        /// </summary>
+        /// <param name="vehicles"></param>
+
+        static void SaveVehicles(List<Vehicle> vehicles)
+        {
+            // initialize variables
+            string dataPath = @"Data/Vehicles.txt";
+            string userVehcicle;
+
+            // iterate through list and save it to file
+            foreach (var vehicle in vehicles)
+            {
+                userVehcicle = vehicle.Name + "," + vehicle.Year + "," + vehicle.Fwd + "\n";
+                File.AppendAllText(dataPath, userVehcicle);
+            }
+            
+            
+        }
+        #endregion
+
+        #region User Input
+        /// <summary>
+        /// ******************************************************
         ///             GET STRING METHOD
         /// ******************************************************
         /// </summary>
@@ -232,7 +262,60 @@ namespace Console_ListOfObjects
             return yN;
 
         }
+        #endregion
 
+        #region Validation
+        /// <summary>
+        /// ******************************************************
+        ///             PROMPT USER FOR AN INTEGER
+        /// ******************************************************
+        /// </summary>
+        /// <param name="prompt"></param>
+        /// <returns></returns>
+        public static int ReadInteger(string prompt)
+        {
+            int ret;
+            Console.Write($"\t{prompt}");
+            ret = IsValidInt();
+            return ret;
+        }
+        /// <summary>
+        /// ******************************************************
+        ///             VALIDATE USER INPUT IS AN INTEGER
+        /// ******************************************************
+        /// </summary>
+        /// <returns></returns>
+        static int IsValidInt()
+        {
+            bool IsValidInt = false;
+            int validInt = 0;
+            while (!IsValidInt)
+            {
+                // set Console Color to White
+                Console.ForegroundColor = ConsoleColor.White;
+                // test user input to see if it's an integer
+                IsValidInt = int.TryParse(Console.ReadLine(), out validInt);
+                if (!IsValidInt)
+                {
+                    Console.WriteLine();
+                    // prompt for an integer
+                    // return console color to green
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write("\tPlease enter an integer value: ");
+                    // set Console Color to White
+                    Console.ForegroundColor = ConsoleColor.White;
+                    IsValidInt = false;
+                }
+            }
+
+            // return console color to green
+            Console.ForegroundColor = ConsoleColor.Green;
+            // return the integer
+            return validInt;
+        }
+        #endregion
+
+        #region Theme
         /// <summary>
         /// ******************************************************
         ///         DISPLAY CONTINUE PROMPT
@@ -253,7 +336,7 @@ namespace Console_ListOfObjects
             Console.ForegroundColor = ConsoleColor.Green;
             Console.ReadKey();
         }
-
+        #endregion
 
     }
 }
