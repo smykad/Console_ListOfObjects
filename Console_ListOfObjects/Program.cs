@@ -24,6 +24,9 @@ namespace Console_ListOfObjects
             // set cursor invisible
             Console.CursorVisible = false;
 
+            // set console color
+            Console.ForegroundColor = ConsoleColor.Green;
+
             // Greet the user
             Console.WriteLine("\tWelcome to the Quick Code: List of Objects assignment for CIT 195");
             Console.WriteLine();
@@ -38,7 +41,18 @@ namespace Console_ListOfObjects
             Console.Clear();
             Console.WriteLine();
             Console.WriteLine();
-            Console.WriteLine($"Thank you for checking out this application, have a nice day!");
+
+            // Thank user
+            Console.WriteLine($"\tThank you for checking out this application, have a nice day!");
+            Console.WriteLine();
+            Console.WriteLine();
+
+            // Pause application for user to close
+            //Set Console Color to Dark Yellow
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.WriteLine($"\tPress any key to exit.");
+            Console.ReadKey();
+
         }
 
         /// <summary>
@@ -64,7 +78,13 @@ namespace Console_ListOfObjects
 
             // set curosr invisible
             Console.CursorVisible = false;
+
+            // set Console Color to Dark Magenta
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
             Console.WriteLine($"\t\tAdd Vehicle");
+
+            // Return Console Color to Green
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine();
 
             do
@@ -119,13 +139,15 @@ namespace Console_ListOfObjects
             //
             Console.WriteLine(string.Format($"\t{ "Vehicle Name",12} {"Year",12} {"\tFour Wheel Drive",17}"));
             Console.WriteLine();
-            
+
             // iterate through the list of vehicles and print in table
-            //
+            // set Console Color to White
+            Console.ForegroundColor = ConsoleColor.White;
             foreach (var vehicle in vehicles)
             {
                 Console.WriteLine(string.Format($"\t{vehicle.Name,12}{$" {vehicle.Year}",12}{vehicle.Fwd,17}"));
             }
+            Console.ForegroundColor = ConsoleColor.Green;
             DisplayContinuePrompt();
         }
         /// <summary>
@@ -137,8 +159,18 @@ namespace Console_ListOfObjects
         /// <returns></returns>
         static string getString(string prompt)
         {
+            // prompt user for a string response
             Console.Write($"\t{prompt}: ");
+
+            // Set Console Color to white for user input
+            Console.ForegroundColor = ConsoleColor.White;
+
+            // get string from user
             string ret = Console.ReadLine();
+
+            // Return Console Color to Green
+            Console.ForegroundColor = ConsoleColor.Green;
+            // return response
             return ret;
         }
         /// <summary>
@@ -156,6 +188,9 @@ namespace Console_ListOfObjects
             // prompt user for input with yes or no question
             Console.Write($"\t{prompt}? ");
 
+            // Set Console Color to white for user input
+            Console.ForegroundColor = ConsoleColor.White;
+
             // take the input
             string userResponse = Console.ReadLine();
 
@@ -170,7 +205,10 @@ namespace Console_ListOfObjects
             {
                 yN = true;
             }
-
+                        
+            // Return Console Color to Green
+            Console.ForegroundColor = ConsoleColor.Green;
+            
             // return the boolean
             return yN;
 
@@ -187,9 +225,16 @@ namespace Console_ListOfObjects
             //
             // Continue prompt
             //
+
+            //Set Console Color to Dark Yellow
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine($"\tPress any key to continue.");
+
+            // Return Console Color to Green
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.ReadKey();
         }
+
 
     }
 }

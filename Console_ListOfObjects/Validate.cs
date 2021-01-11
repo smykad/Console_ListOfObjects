@@ -39,17 +39,25 @@ namespace Console_ListOfObjects
             int validInt = 0;
             while (!IsValidInt)
             {
+                // set Console Color to White
+                Console.ForegroundColor = ConsoleColor.White;
                 // test user input to see if it's an integer
                 IsValidInt = int.TryParse(Console.ReadLine(), out validInt);
                 if (!IsValidInt)
                 {
                     Console.WriteLine();
                     // prompt for an integer
+                    // return console color to green
+                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.Write("\tPlease enter an integer value: ");
+                    // set Console Color to White
+                    Console.ForegroundColor = ConsoleColor.White;
                     IsValidInt = false;
                 }
             }
 
+            // return console color to green
+            Console.ForegroundColor = ConsoleColor.Green;
             // return the integer
             return validInt;
         }
