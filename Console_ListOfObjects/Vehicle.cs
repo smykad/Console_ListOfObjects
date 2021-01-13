@@ -13,12 +13,28 @@ namespace Console_ListOfObjects
     /// </summary>
     public class Vehicle
     {
+        public enum Model
+        {
+            NONE,
+            CHEVY,
+            FORD,
+            TOYOTA,
+            HONDA,
+            DONE
+        }
         //
         // variables for class to get/set
         //
         private string _name;
         private int _year;
         private bool _fwd;
+        private Model _make;
+
+        public Model Make
+        {
+            get { return _make; }
+            set { _make = value; }
+        }
 
         public bool Fwd
         {
@@ -47,11 +63,12 @@ namespace Console_ListOfObjects
         // for creating a new vehicle
         //
 
-        public Vehicle(string name,int year, bool fwd)
+        public Vehicle(string name,int year, bool fwd, Model model)
         {
             _name = name;
             _year = year;
             _fwd = fwd;
+            _make = model;
         }
     }
 }

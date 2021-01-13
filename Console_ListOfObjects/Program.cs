@@ -18,9 +18,11 @@ namespace Console_ListOfObjects
     // Last Modified: 1/11/2021
     //
     // **************************************************
+
     class Program
     {
         #region Main
+
         static void Main(string[] args)
         {
             // set cursor invisible
@@ -106,6 +108,9 @@ namespace Console_ListOfObjects
                 // create new vehicle
                 Vehicle myVehicle = new Vehicle { Name = name, Year = year, Fwd = fwd };
 
+                // use method for getting model from enum list with validation
+                GetModel(myVehicle);               
+
                 // add vehicle to list
                 vehicles.Add(myVehicle);
 
@@ -125,6 +130,10 @@ namespace Console_ListOfObjects
             return vehicles;
             
         }
+
+
+
+
         /// <summary>
         /// ******************************************************
         ///             DISPLAY VEHICLE METHOD
@@ -145,7 +154,7 @@ namespace Console_ListOfObjects
             Console.WriteLine();
             // display headers for columns
             //
-            Console.WriteLine(string.Format($"\t{ "Vehicle Name",12} {"Year",12} {"\tFour Wheel Drive",17}"));
+            Console.WriteLine(string.Format($"\t{ "Vehicle Name",12} {"Year",12} {"\tFour Wheel Drive",17} {"\tModel",12}"));
             Console.WriteLine();
 
             // iterate through the list of vehicles and print in table
@@ -153,7 +162,7 @@ namespace Console_ListOfObjects
             Console.ForegroundColor = ConsoleColor.White;
             foreach (var vehicle in vehicles)
             {
-                Console.WriteLine(string.Format($"\t{vehicle.Name,12}{$" {vehicle.Year}",12}{vehicle.Fwd,17}"));
+                Console.WriteLine(string.Format($"\t{vehicle.Name,12}{$" {vehicle.Year}",12}{vehicle.Fwd,17}{vehicle.Make,20}"));
                 
                 // increment number of vehicles listed
                 numberOfVehicles += 1;
@@ -291,17 +300,21 @@ namespace Console_ListOfObjects
             int validInt = 0;
             while (!IsValidInt)
             {
+                
                 // set Console Color to White
                 Console.ForegroundColor = ConsoleColor.White;
+                
                 // test user input to see if it's an integer
                 IsValidInt = int.TryParse(Console.ReadLine(), out validInt);
                 if (!IsValidInt)
                 {
                     Console.WriteLine();
+                    
                     // prompt for an integer
                     // return console color to green
-                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
                     Console.Write("\tPlease enter an integer value: ");
+
                     // set Console Color to White
                     Console.ForegroundColor = ConsoleColor.White;
                     IsValidInt = false;
@@ -312,6 +325,61 @@ namespace Console_ListOfObjects
             Console.ForegroundColor = ConsoleColor.Green;
             // return the integer
             return validInt;
+        }
+
+        /// <summary>
+        /// ******************************************************
+        ///             VALIDATE USER ENUM
+        /// ******************************************************
+        /// </summary>
+        /// <param name="myVehicle"></param>
+        static void GetModel(Vehicle myVehicle)
+        {
+            // initialize variables
+            bool validResponse;
+
+            // set color to green
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write("\tPlease enter the model of your car: ");
+            do
+            {
+                // set color to white for user input
+                Console.ForegroundColor = ConsoleColor.White;
+
+                if(Enum.TryParse(Console.ReadLine().ToUpper(), out Vehicle.Model model))
+                {
+                    // set vehicles model
+                    myVehicle.Make = model;
+                    validResponse = true;
+                }
+                else
+                {
+
+                    Console.WriteLine();
+                    Console.Write("\t");
+
+                    // Display the enum choices in table
+                    foreach (Vehicle.Model make in Enum.GetValues(typeof(Vehicle.Model)))
+                    {
+                        Console.Write(" | " + make);
+                    }
+
+                    // set to red for invalid entry
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine();
+
+                    // Ask user for valid model 
+                    Console.Write("\tPlease enter a valid model: ");
+
+                    // set to white for user input
+                    Console.ForegroundColor = ConsoleColor.White;
+                    validResponse = false;
+                }
+            } while (!validResponse);
+
+            // set color back to green
+            Console.ForegroundColor = ConsoleColor.Green;
+
         }
         #endregion
 

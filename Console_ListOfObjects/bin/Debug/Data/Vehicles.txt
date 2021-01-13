@@ -1,2 +1,3 @@
 ﻿Rusty,2002,False
 speedy,1995,True
+speedy,2002,False
