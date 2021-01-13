@@ -131,9 +131,6 @@ namespace Console_ListOfObjects
             
         }
 
-
-
-
         /// <summary>
         /// ******************************************************
         ///             DISPLAY VEHICLE METHOD
@@ -199,11 +196,9 @@ namespace Console_ListOfObjects
             // iterate through list and save it to file
             foreach (var vehicle in vehicles)
             {
-                userVehcicle = vehicle.Name + "," + vehicle.Year + "," + vehicle.Fwd + "\n";
+                userVehcicle = vehicle.Name + "," + vehicle.Year + "," + vehicle.Fwd + "," + vehicle.Make + "\n";
                 File.AppendAllText(dataPath, userVehcicle);
-            }
-            
-            
+            }   
         }
         #endregion
 
